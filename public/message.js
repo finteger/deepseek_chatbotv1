@@ -31,6 +31,12 @@ async function sendMessage(){
             signal: abortController.signal
         });
 
+        const botDiv = document.createElement('div');
+        botDiv.className = 'bot-message';
+        botDiv.textContent = 'AI: ';
+        chatBox.appendChild(botDiv);
+
+
     } catch (error) {
         
     }
