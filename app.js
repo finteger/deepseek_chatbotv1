@@ -35,11 +35,10 @@ app.post('/api/chat-stream', async (req, res) =>{
             break;
         }
     }
-
     res.end();
     
   } catch (error) {
-    
+    res.status(500).json(error);
   }
 });
 
