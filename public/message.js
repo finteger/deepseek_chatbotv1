@@ -17,8 +17,22 @@ async function sendMessage(){
         stopGeneration();
     }
 
-    
+    //Add user message
+    chatBox.innerHTML += `<div class="user-message">You: ${prompt}</div>`;
+  
 
+    try {
+        abortController = new AbortController();
 
+        const response = await fetch('http://localhost:8080/api/chat-stream',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({prompt}),
+            signal: abortController.signal
+        });
+
+    } catch (error) {
+        
+    }
 
 }
