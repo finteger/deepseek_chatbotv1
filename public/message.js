@@ -24,7 +24,7 @@ async function sendMessage(){
     try {
         abortController = new AbortController();
 
-        const response = await fetch('http://localhost:8080/api/chat-stream',{
+        const response = await fetch('http://localhost:3000/api/chat-stream',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({prompt}),
