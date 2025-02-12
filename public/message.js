@@ -38,7 +38,7 @@ async function sendMessage(){
             const { done, value } = await reader.read();
             if(done) break;
 
-            boxDiv.textContent += decoder.decode(value);
+            botDiv.textContent += decoder.decode(value);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
