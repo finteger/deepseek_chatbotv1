@@ -63,5 +63,5 @@ function stopGeneration(){
         abortController.abort();
     }
     isGenerating = false;
-    stopBtn.disabled = true;
+    document.getElementById('stop-btn').disabled = true;
 }
