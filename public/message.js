@@ -31,6 +31,17 @@ async function sendMessage(){
             signal: abortController.signal
         });
 
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        while(isGenerating){
+            const { done, value } = await reader.read();
+            if(done) break;
+
+            boxDiv.textContent += decoder.decode(value);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
         const botDiv = document.createElement('div');
         botDiv.className = 'bot-message';
         botDiv.textContent = 'AI: ';
@@ -38,7 +49,19 @@ async function sendMessage(){
 
 
     } catch (error) {
-        
+        if(error.name !== 'AbortError'){
+            chatBox.innerHTML = `<div class="bot-message style="color:red;">${error.message}</div>`;
+        }
+    } finally {
+        stopBtn.disabled = true;
+        isGenerating = false;
     }
+}
 
+function stopGeneration(){
+    if(abortController){
+        abortController.abort();
+    }
+    isGenerating = false;
+    stopBtn.disabled = true;
 }

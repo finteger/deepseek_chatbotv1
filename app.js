@@ -38,7 +38,7 @@ app.post('/api/chat-stream', async (req, res) =>{
     res.end();
     
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 });
 
