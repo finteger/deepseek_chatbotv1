@@ -31,8 +31,15 @@ async function sendMessage(){
             signal: abortController.signal
         });
 
+
+
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
+
+        const botDiv = document.createElement('div');
+        botDiv.className = 'bot-message';
+        botDiv.textContent = 'AI: ';
+        chatBox.appendChild(botDiv);
 
         while(isGenerating){
             const { done, value } = await reader.read();
@@ -41,11 +48,6 @@ async function sendMessage(){
             botDiv.textContent += decoder.decode(value);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
-
-        const botDiv = document.createElement('div');
-        botDiv.className = 'bot-message';
-        botDiv.textContent = 'AI: ';
-        chatBox.appendChild(botDiv);
 
 
     } catch (error) {
